@@ -17,11 +17,17 @@ public class JoinService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void joinProcess(JoinDTO joinDTO){
+        
+        // 중복 검증
+        boolean isUser = userRepository.existsByUsername(joinDTO.getUsername());
+        if(isUser){
+            return;
+        }
+
         UserEntity user = new UserEntity();
         user.setUsername(joinDTO.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(joinDTO.getPassword()));
         user.setRole("ROLE_USER");
-
         userRepository.save(user);
     }
 
