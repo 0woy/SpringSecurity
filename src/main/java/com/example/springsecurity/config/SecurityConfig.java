@@ -39,7 +39,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    
     // PW 해시함수로 단방향 암호화
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
